@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="https://office-editor.ziziyi.com/v9.3.0.24-1/web-apps/vendor/monaco/">
+    <meta charset="UTF-8">
+    <title>CODE EDITOR</title>
+    <style type="text/css">
+        #editor {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+    <script src="./monaco.js"></script>
+</head>
+<body>
+    <div id="editor"></div>
+
+    <!-- code -->
+    <script>
+        function getUrlParams() {
+            var e,
+                    a = /\+/g,  // Regex for replacing addition symbol with a space
+                    r = /([^&=]+)=?([^&]*)/g,
+                    d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
+                    q = window.location.search.substring(1),
+                    urlParams = {};
+
+            while (e = r.exec(q))
+                urlParams[d(e[1])] = d(e[2]);
+
+            return urlParams;
+        }
+
+        var params = getUrlParams();
+        window.editorType = params["editorType"]; // word/cell/slide
+        window.editorTheme = params["editorTheme"]; // dark/light
+        window.language = params["language"]; //javascript/vba
+        window.id = params["id"];
+    </script>
+    <script src="./MonacoEditorCode.js"></script>
+</body>
+</html>

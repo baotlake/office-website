@@ -1,0 +1,6 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "office-website",
+  "compatibility_date": "2026-01-12",
+  "pages_build_output_dir": "./out"
+}

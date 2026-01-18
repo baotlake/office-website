@@ -1,0 +1,15 @@
+<svg width="200" height="120" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <rect width="200" height="120" fill="#E2E8F0"/>
+  <!-- Top Bar -->
+  <rect width="200" height="12" fill="#CBD5E1"/>
+  <rect x="85" y="4" width="30" height="3" rx="1.5" fill="#94A3B8"/>
+  <!-- Toolbar/Ribbon -->
+  <rect y="12" width="200" height="24" fill="#F1F5F9"/>
+  <rect x="8" y="16" width="184" height="16" rx="2" fill="white" stroke="#CBD5E1" stroke-width="0.5"/>
+  <rect x="14" y="21" width="12" height="6" rx="1" fill="#E2E8F0"/>
+  <!-- Workspace & Document -->
+  <rect x="12" y="36" width="188" height="76" fill="#F1F5F9"/>
+  <rect x="35" y="42" width="140" height="70" fill="white" rx="1" stroke="#E2E8F0" stroke-width="0.5"/>
+  <!-- Status Bar -->
+  <rect y="112" width="200" height="8" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="0.5"/>
+</svg>

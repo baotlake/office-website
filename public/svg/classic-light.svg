@@ -1,0 +1,21 @@
+<svg width="200" height="120" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <rect width="200" height="120" fill="#E8EBEE"/>
+  <!-- Top Bar - Classic Blue -->
+  <rect width="200" height="15" fill="#446995"/>
+  <rect x="85" y="6" width="30" height="3" rx="1.5" fill="white" fill-opacity="0.8"/>
+  <!-- Tabs area -->
+  <rect x="12" y="15" width="25" height="12" fill="#F3F3F3"/> <!-- Active tab -->
+  <rect x="42" y="15" width="25" height="12" fill="transparent"/>
+  <!-- Toolbar/Ribbon -->
+  <rect y="27" width="200" height="20" fill="#F3F3F3" stroke="#D1D1D1" stroke-width="0.5"/>
+  <rect x="10" y="32" width="40" height="4" rx="1" fill="#D1D1D1"/>
+  <rect x="10" y="39" width="60" height="4" rx="1" fill="#E5E5E5"/>
+  <rect x="140" y="32" width="50" height="10" rx="1" fill="white" stroke="#D1D1D1" stroke-width="0.5"/>
+  <!-- Workspace -->
+  <rect y="47" width="12" height="65" fill="#E8EBEE"/>
+  <rect x="3" y="52" width="6" height="6" rx="1" fill="#99ABB9"/>
+  <rect x="12" y="47" width="188" height="65" fill="#D6DBE2"/>
+  <rect x="35" y="52" width="140" height="68" fill="white" rx="1" shadow="0 1 2 rgba(0,0,0,0.1)"/>
+  <!-- Status Bar -->
+  <rect y="112" width="200" height="8" fill="#F3F3F3" stroke="#D1D1D1" stroke-width="0.5"/>
+</svg>

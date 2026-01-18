@@ -1,0 +1,6 @@
+/x2t/x2t.wasm
+    Content-Encoding: br
+
+/x2t-*
+    Content-Encoding: br
+    Cache-Control: public, max-age=31556952, immutable
