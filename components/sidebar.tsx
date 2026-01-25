@@ -31,10 +31,25 @@ interface SidebarProps {
   getNewUrl?: (type: string) => string;
 }
 
-const newDocTypes = ["docx", "xlsx", "pptx", "pdf"];
-
 export function Sidebar({ activeTab, setActiveTab, getNewUrl }: SidebarProps) {
   const t = useExtracted();
+
+  const newDocTypes = [
+    {
+      type: "docx",
+      label: t({ id: "Document", message: "Document" }),
+    },
+    {
+      type: "xlsx",
+      label: t({ id: "Spreadsheet", message: "Spreadsheet" }),
+    },
+    {
+      type: "pptx",
+      label: t({ id: "Presentation", message: "Presentation" }),
+    },
+    { type: "pdf", label: t({ id: "PDF", message: "PDF" }) },
+  ];
+
   const sidebarItems = [
     { id: "open", label: t("Open"), icon: FolderOpen },
     { id: "template", label: t("Template"), icon: Layout },
@@ -60,7 +75,7 @@ export function Sidebar({ activeTab, setActiveTab, getNewUrl }: SidebarProps) {
             className="w-56 p-2 bg-popover border-border"
           >
             <div className="space-y-2">
-              {newDocTypes.map((type) => {
+              {newDocTypes.map(({ type, label }) => {
                 const doc = getDocConfig(type);
                 const Icon = doc.icon;
                 return (
@@ -83,7 +98,7 @@ export function Sidebar({ activeTab, setActiveTab, getNewUrl }: SidebarProps) {
                       )}
                     />
                     <span className="text-sm font-medium text-foreground dark:text-slate-200">
-                      {doc.label}
+                      {label}
                     </span>
                   </Link>
                 );

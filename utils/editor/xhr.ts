@@ -36,7 +36,7 @@ export function createXHRProxy(BaseXHR = globalThis.XMLHttpRequest) {
       url: string | URL,
       async: boolean = true,
       username?: string | null,
-      password?: string | null
+      password?: string | null,
     ): void {
       this._requestMethod = method;
       this._requestUrl = url.toString();
@@ -49,7 +49,7 @@ export function createXHRProxy(BaseXHR = globalThis.XMLHttpRequest) {
         url,
         async,
         username ?? undefined,
-        password ?? undefined
+        password ?? undefined,
       );
     }
 
@@ -96,6 +96,12 @@ export function createXHRProxy(BaseXHR = globalThis.XMLHttpRequest) {
         }
 
         request = new Request(this._requestUrl, reqInit);
+        console.log("ProxyXHR created request:", {
+          url: this._requestUrl,
+          method: request.method,
+          hasBody: !!request.body,
+          originalBody: this._requestBody,
+        });
       } catch (e) {
         // Unable to create Request, do not use middleware
         return false;
@@ -191,7 +197,7 @@ export function createXHRProxy(BaseXHR = globalThis.XMLHttpRequest) {
             lengthComputable: true,
             loaded: 100,
             total: 100,
-          })
+          }),
         );
 
         // 5. DONE (readyState = 4)

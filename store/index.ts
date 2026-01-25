@@ -7,14 +7,7 @@ import {
   LocaleExtend,
   standardizeLocale,
 } from "@ziziyi/utils";
-
-export type OfficeTheme =
-  | "theme-light"
-  | "theme-classic-light"
-  | "theme-white"
-  | "theme-dark"
-  | "theme-night"
-  | "theme-contrast-dark";
+import { type OfficeTheme } from "@/utils/editor/types";
 
 /**
  * Resolves the language setting to an actual locale code.
@@ -76,12 +69,4 @@ export const useAppStore = create<AppState>()(
  */
 export function useResolvedLanguage(): Locale {
   return useAppStore((state) => resolveLanguage(state.language));
-}
-
-export function isDarkTheme(theme: OfficeTheme): boolean {
-  return (
-    theme === "theme-dark" ||
-    theme === "theme-night" ||
-    theme === "theme-contrast-dark"
-  );
 }

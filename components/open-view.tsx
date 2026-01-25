@@ -126,7 +126,21 @@ export function OpenView({
     }
   };
 
-  const newDocTypes = ["docx", "xlsx", "pptx", "pdf"];
+  const newDocTypes = [
+    {
+      type: "docx",
+      label: t({ id: "Document", message: "Document" }),
+    },
+    {
+      type: "xlsx",
+      label: t({ id: "Spreadsheet", message: "Spreadsheet" }),
+    },
+    {
+      type: "pptx",
+      label: t({ id: "Presentation", message: "Presentation" }),
+    },
+    { type: "pdf", label: t({ id: "PDF", message: "PDF" }) },
+  ];
 
   return (
     <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -140,14 +154,14 @@ export function OpenView({
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-bold">{t("New")}</h2>
         </div>
-        <div className="flex flex-wrap md:flex-nowrap items-stretch gap-3 mb-4">
-          {newDocTypes.map((type) => {
+        <div className="grid grid-cols-2 md:flex md:flex-nowrap items-stretch gap-3 mb-4">
+          {newDocTypes.map(({ type, label }) => {
             const doc = getDocConfig(type);
             return (
               <Link
                 key={type}
                 href={getNewUrl ? getNewUrl(type) : "#"}
-                className="flex-1 min-w-[120px] sm:min-w-0 flex flex-col items-center justify-center gap-2 p-4 bg-card-bg/50 border border-border rounded-2xl hover:border-primary/50 hover:shadow-lg hover:-translate-y-0.5 transition-all group overflow-hidden"
+                className="flex flex-col items-center justify-center gap-2 p-4 bg-muted/40 dark:bg-white/5 border border-border rounded-2xl hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-0.5 transition-all group overflow-hidden md:flex-1 md:min-w-0"
               >
                 <DocumentIcon
                   type={type}
@@ -157,7 +171,9 @@ export function OpenView({
                   )}
                   iconClassName="group-hover:text-white"
                 />
-                <span className="text-xs font-semibold">{doc.label}</span>
+                <span className="text-xs font-semibold transition-colors">
+                  {label}
+                </span>
               </Link>
             );
           })}
@@ -185,13 +201,13 @@ export function OpenView({
             >
               <div
                 className={cn(
-                  "aspect-16/10 rounded-lg border border-border shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all relative overflow-hidden bg-white",
+                  "aspect-16/10 rounded-lg border border-border dark:border-white/5 shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all relative overflow-hidden bg-white dark:bg-zinc-900",
                 )}
               >
                 <img
                   src={`/files/${encodeURIComponent(tpl.preview)}`}
                   alt={tpl.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
                 />
 
                 {loadingTemplate === tpl.name && (
@@ -204,6 +220,7 @@ export function OpenView({
                   className={cn(
                     "absolute top-2 right-2 px-1.5 py-0.5 rounded text-[10px] font-bold uppercase z-10",
                     getDocConfig(tpl.type).color,
+                    "dark:text-white dark:bg-primary/80",
                     getDocConfig(tpl.type).lightBgColor,
                   )}
                 >

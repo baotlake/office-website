@@ -91,11 +91,14 @@ export default function Page({ params }: { params: Promise<{}> }) {
           url: doc.url,
 
           permissions: {
-            edit: true,
+            // TODO: fix PDF edit
+            edit: doc.fileType != "pdf",
             chat: false,
             rename: true,
             protect: true,
             review: false,
+            // TODO: fix export to PDF
+            print: false,
           },
         },
         documentType: documentType,
@@ -127,7 +130,10 @@ export default function Page({ params }: { params: Promise<{}> }) {
             //   label: "Guest",
             // },
             logo: {
-              visible: false,
+              image: location.origin + "/logo-name_black.svg",
+              imageDark: location.origin + "/logo-name_white.svg",
+              url: location.origin,
+              // visible: false,
             },
           },
         },

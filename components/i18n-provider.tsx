@@ -4,6 +4,7 @@ import { NextIntlClientProvider, AbstractIntlMessages } from "next-intl";
 import { useEffect, useState, ReactNode } from "react";
 import { useResolvedLanguage } from "@/store";
 import { Locale } from "@ziziyi/utils";
+import { getTimeZone } from "@/i18n/config";
 
 // Cache for loaded messages
 const messagesCache: Partial<Record<Locale, AbstractIntlMessages>> = {};
@@ -55,7 +56,11 @@ export function I18nProvider({ children, initialMessages }: I18nProviderProps) {
   }, [locale]);
 
   return (
-    <NextIntlClientProvider locale={currentLocale} messages={messages}>
+    <NextIntlClientProvider
+      locale={currentLocale}
+      messages={messages}
+      timeZone={getTimeZone(currentLocale)}
+    >
       {children}
     </NextIntlClientProvider>
   );

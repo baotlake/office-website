@@ -201,3 +201,11 @@ export interface X2tConvertResult {
   output: Uint8Array<ArrayBuffer> | null;
   media: { [key: string]: Uint8Array<ArrayBuffer> };
 }
+
+export type OfficeTheme =
+  | "theme-light"
+  | "theme-classic-light"
+  | "theme-white"
+  | "theme-dark"
+  | "theme-night"
+  | "theme-contrast-dark";

@@ -45,16 +45,23 @@ export function Header({ children }: PropsWithChildren<{}>) {
     <header className="h-16 flex items-center justify-between px-6 z-20 w-full shrink-0">
       <div className="flex items-center gap-3">
         <div className="flex items-center justify-center">
-          <img src="/logo.svg" className="w-8 h-8" alt="logo" />
+          <img src="/logo.svg" className="w-9 h-9" alt="logo" />
         </div>
-        <h1 className="text-xl font-bold tracking-tight text-foreground">
-          {t("Office App")}
+        <h1 className="text-lg font-bold tracking-tight text-foreground leading-5 pt-1">
+          {t("Office")}
+          <a
+            href="https://ziziyi.com/products/office"
+            target="_blank"
+            className="block text-xs font-normal scale-[0.85] origin-top-left tracking-widest"
+          >
+            by ZIZIYI
+          </a>
         </h1>
       </div>
 
       {children}
 
-      <div className="flex items-center gap-2">
+      <div className="hidden md:flex items-center gap-2">
         {quickActions.map((action) => (
           <Link
             key={action.type}

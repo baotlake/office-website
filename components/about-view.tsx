@@ -22,12 +22,12 @@ export function AboutView() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-        <div className="p-8 bg-card-bg/30 border border-border rounded-3xl hover:border-primary/30 transition-all group">
-          <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors duration-300">
-            <Github className="w-6 h-6 text-primary group-hover:text-white" />
+        <div className="p-8 bg-white/5 dark:bg-white/5 border border-border dark:border-white/10 rounded-3xl hover:border-primary/50 dark:hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all group">
+          <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-2xl flex items-center justify-center mb-6">
+            <Github className="w-6 h-6 text-primary" />
           </div>
           <h3 className="text-xl font-bold mb-3">{t("Open Source")}</h3>
-          <p className="text-text-secondary text-sm leading-relaxed mb-6">
+          <p className="text-text-secondary dark:text-slate-400 text-sm leading-relaxed mb-6">
             {t(
               "We believe in the power of community. The source code for this project is available on GitHub for everyone to view, contribute, and improve.",
             )}
@@ -42,14 +42,14 @@ export function AboutView() {
           </a>
         </div>
 
-        <div className="p-8 bg-card-bg/30 border border-border rounded-3xl hover:border-primary/30 transition-all group">
-          <div className="w-12 h-12 bg-orange-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-orange-600 transition-colors duration-300">
-            <ShieldCheck className="w-6 h-6 text-orange-600 group-hover:text-white" />
+        <div className="p-8 bg-white/5 dark:bg-white/5 border border-border dark:border-white/10 rounded-3xl hover:border-primary/50 dark:hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all group">
+          <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-2xl flex items-center justify-center mb-6">
+            <ShieldCheck className="w-6 h-6 text-primary" />
           </div>
           <h3 className="text-xl font-bold mb-3">
             {t("Powered by OnlyOffice")}
           </h3>
-          <p className="text-text-secondary text-sm leading-relaxed">
+          <p className="text-text-secondary dark:text-slate-400 text-sm leading-relaxed">
             {t(
               "This project is built upon the robust foundation of OnlyOffice open-source code. We strictly adhere to and support OnlyOffice's open-source license, ensuring a sustainable ecosystem for document processing.",
             )}
@@ -57,11 +57,11 @@ export function AboutView() {
         </div>
       </div>
 
-      <div className="p-10 bg-linear-to-br from-primary/5 to-secondary/50 dark:from-primary/10 dark:to-primary/5 border border-border rounded-4xl text-center space-y-6">
-        <Heart className="w-8 h-8 text-red-500 mx-auto fill-red-500 animate-pulse" />
+      <div className="p-10 bg-linear-to-br from-primary/10 to-orange-500/10 dark:from-primary/15 dark:to-orange-500/5 border border-primary/20 dark:border-primary/30 rounded-3xl text-center space-y-6 shadow-lg shadow-primary/5">
+        <Heart className="w-8 h-8 text-red-500 dark:text-red-400 mx-auto fill-red-500 dark:fill-red-400 animate-pulse" />
         <div className="space-y-2">
           <h3 className="text-2xl font-bold">{t("Our Commitment")}</h3>
-          <p className="text-text-secondary text-sm max-w-xl mx-auto leading-relaxed">
+          <p className="text-text-secondary dark:text-slate-400 text-sm max-w-xl mx-auto leading-relaxed">
             {t(
               "Our goal is to provide a seamless, local-first office experience while maintaining the highest standards of compatibility and open-source compliance.",
             )}

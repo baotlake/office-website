@@ -369,7 +369,7 @@ export class EditorServer {
 
     if (u.pathname.endsWith("/downloadas/" + key)) {
       const cmd = JSON.parse(u.searchParams.get("cmd") || "{}");
-      const buffer = await new Response(req.body).arrayBuffer();
+      const buffer = await req.arrayBuffer();
 
       console.log("downloadAs -> ", cmd, buffer);
 
@@ -381,14 +381,19 @@ export class EditorServer {
 
       const download = async () => {
         const input = mergeBuffers(this.downloadParts);
+        let fileFrom = "from.bin";
+        if (cmd.format == "pdf") {
+          fileFrom = "from.pdf";
+        }
+
         let { output } = await converter.convert({
           data: input.buffer,
-          fileFrom: "from.bin",
+          fileFrom: fileFrom,
           fileTo: fileTo,
           formatTo: formatTo,
           media: Object.fromEntries(this.fsMap),
         });
-        if (!output && fileTo.endsWith(".pdf")) {
+        if (!output && cmd.format == "pdf") {
           output = input;
         }
         if (!output) {
@@ -398,7 +403,7 @@ export class EditorServer {
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = cmd.title || "test.pptx";
+        a.download = cmd.title || "test.docx";
         a.click();
         URL.revokeObjectURL(url);
 
@@ -444,7 +449,7 @@ export class EditorServer {
     }
 
     if (u.pathname.endsWith("/upload/" + key)) {
-      const buffer = await new Response(req.body).arrayBuffer();
+      const buffer = await req.arrayBuffer();
       const data = new Uint8Array(buffer);
       const filename = Date.now() + ".png";
       const pathname = "media/" + filename;

@@ -86,15 +86,6 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --sidebar-bg: #141414;
-    --sidebar-hover: #1f1f1f;
-    --border: #323130;
-    --text-secondary: #a19f9d;
-  }
-}
-
 body {
   font-family:
     "Segoe UI",
@@ -110,13 +101,13 @@ body {
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
+  --primary: hsl(12, 80%, 60%);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: hsl(12, 15%, 25%);
   --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
+  --muted: hsl(12, 10%, 20%);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
+  --accent: hsl(12, 20%, 30%);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useAppStore, OfficeTheme } from "@/store";
+import { useAppStore } from "@/store";
 import { Globe, Palette, Check } from "lucide-react";
 import * as Illustration from "@/components/svg";
 import { useExtracted } from "next-intl";
@@ -13,6 +13,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { OfficeTheme } from "@/utils/editor/types";
+import { isDarkTheme } from "@/utils/utils";
 
 // Get display name for a language code
 function getLanguageLabel(code: Language): string {
@@ -75,6 +77,9 @@ export function SettingsView() {
     if (typeof window !== "undefined") {
       localStorage.removeItem("ui-theme");
       localStorage.removeItem("ui-theme-id");
+
+      const themeValue = isDarkTheme(newTheme) ? "dark" : "light";
+      document.cookie = `theme=${themeValue}; path=/`;
     }
     setTheme(newTheme);
   };
@@ -131,7 +136,7 @@ export function SettingsView() {
             <Palette className="w-5 h-5 text-primary" />
             <h2>{t("Editor Theme")}</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
             {themes.map((t) => (
               <button
                 key={t.id}
