@@ -23,15 +23,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-type Tab = "open" | "template" | "about" | "settings";
-
 interface SidebarProps {
-  activeTab: Tab;
-  setActiveTab: (tab: Tab) => void;
+  pathname: string;
   getNewUrl?: (type: string) => string;
 }
 
-export function Sidebar({ activeTab, setActiveTab, getNewUrl }: SidebarProps) {
+export function Sidebar({ pathname, getNewUrl }: SidebarProps) {
   const t = useExtracted();
 
   const newDocTypes = [
@@ -51,8 +48,8 @@ export function Sidebar({ activeTab, setActiveTab, getNewUrl }: SidebarProps) {
   ];
 
   const sidebarItems = [
-    { id: "open", label: t("Open"), icon: FolderOpen },
-    { id: "template", label: t("Template"), icon: Layout },
+    { id: "open", label: t("Open"), icon: FolderOpen, href: "/" },
+    { id: "template", label: t("Template"), icon: Layout, href: "/template" },
   ];
 
   return (
@@ -109,34 +106,37 @@ export function Sidebar({ activeTab, setActiveTab, getNewUrl }: SidebarProps) {
       </div>
 
       <nav className="flex-1 px-4 py-2 space-y-1">
-        {sidebarItems.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => setActiveTab(item.id as Tab)}
-            className={cn(
-              "w-full flex items-center gap-3 px-3 py-2.5 rounded-md transition-colors text-sm font-medium text-left",
-              activeTab === item.id
-                ? "bg-primary/10 text-primary"
-                : "text-foreground hover:bg-sidebar-hover hover:text-foreground",
-            )}
-          >
-            <item.icon
+        {sidebarItems.map((item) => {
+          const isActive = pathname === item.href;
+          return (
+            <Link
+              key={item.id}
+              href={item.href}
               className={cn(
-                "w-5 h-5",
-                activeTab === item.id ? "text-primary" : "text-text-secondary",
+                "w-full flex items-center gap-3 px-3 py-2.5 rounded-md transition-colors text-sm font-medium",
+                isActive
+                  ? "bg-primary/10 text-primary"
+                  : "text-foreground hover:bg-sidebar-hover hover:text-foreground",
               )}
-            />
-            {item.label}
-          </button>
-        ))}
+            >
+              <item.icon
+                className={cn(
+                  "w-5 h-5",
+                  isActive ? "text-primary" : "text-text-secondary",
+                )}
+              />
+              {item.label}
+            </Link>
+          );
+        })}
       </nav>
 
       <div className="p-4 space-y-1">
-        <button
-          onClick={() => setActiveTab("about")}
+        <Link
+          href="/about"
           className={cn(
             "w-full flex items-center gap-3 px-3 py-2 text-sm transition-colors rounded-md",
-            activeTab === "about"
+            pathname === "/about"
               ? "bg-primary/10 text-primary"
               : "text-text-secondary hover:text-foreground hover:bg-sidebar-hover",
           )}
@@ -144,17 +144,17 @@ export function Sidebar({ activeTab, setActiveTab, getNewUrl }: SidebarProps) {
           <Info
             className={cn(
               "w-5 h-5",
-              activeTab === "about" ? "text-primary" : "text-text-secondary",
+              pathname === "/about" ? "text-primary" : "text-text-secondary",
             )}
           />
           {t("About")}
-        </button>
+        </Link>
 
-        <button
-          onClick={() => setActiveTab("settings")}
+        <Link
+          href="/settings"
           className={cn(
             "w-full flex items-center gap-3 px-3 py-2 text-sm transition-colors rounded-md",
-            activeTab === "settings"
+            pathname === "/settings"
               ? "bg-primary/10 text-primary"
               : "text-text-secondary hover:text-foreground hover:bg-sidebar-hover",
           )}
@@ -162,11 +162,11 @@ export function Sidebar({ activeTab, setActiveTab, getNewUrl }: SidebarProps) {
           <Settings
             className={cn(
               "w-5 h-5",
-              activeTab === "settings" ? "text-primary" : "text-text-secondary",
+              pathname === "/settings" ? "text-primary" : "text-text-secondary",
             )}
           />
           {t("Settings")}
-        </button>
+        </Link>
       </div>
     </aside>
   );

@@ -1,14 +1,10 @@
 "use client";
 
-import { useState, useCallback, useEffect, Suspense } from "react";
-import { useRouter } from "next/navigation";
+import { useCallback, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { useExtracted } from "next-intl";
 import { Header } from "@/components/header";
 import { Sidebar } from "@/components/sidebar";
-import { OpenView } from "@/components/open-view";
-import { TemplateView } from "@/components/template-view";
-import { AboutView } from "@/components/about-view";
-import { SettingsView } from "@/components/settings-view";
 import { DragDropOverlay } from "@/components/drag-drop-overlay";
 import { useAppStore } from "@/store";
 import { addRecentFile } from "@/utils/recent-files";
@@ -16,12 +12,14 @@ import { cn } from "@/lib/utils";
 import { MobileNav } from "@/components/mobile-nav";
 import { isDarkTheme } from "@/utils/utils";
 
-type Tab = "open" | "template" | "about" | "settings";
-
-function HomeContent() {
+export default function MainLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const router = useRouter();
+  const pathname = usePathname();
   const t = useExtracted();
-  const [activeTab, setActiveTabState] = useState<Tab>("open");
   const { server, theme } = useAppStore();
 
   useEffect(() => {
@@ -32,20 +30,6 @@ function HomeContent() {
       document.documentElement.classList.remove("dark");
     }
   }, [theme]);
-
-  useEffect(() => {
-    const tab = new URLSearchParams(location.search).get("tab") as Tab;
-    if (tab) {
-      setActiveTab(tab);
-    }
-  }, []);
-
-  const setActiveTab = (tab: Tab) => {
-    setActiveTabState(tab);
-    const u = new URL(location.href);
-    u.searchParams.set("tab", tab);
-    router.replace(u.toString());
-  };
 
   const handleFileSelect = useCallback(
     async (file: File, handle?: FileSystemFileHandle) => {
@@ -96,11 +80,7 @@ function HomeContent() {
       </Header>
       <div className="flex flex-1 overflow-hidden flex-col md:flex-row relative z-10">
         <div className="hidden md:flex">
-          <Sidebar
-            activeTab={activeTab}
-            setActiveTab={(tab: Tab) => setActiveTab(tab)}
-            getNewUrl={getNewUrl}
-          />
+          <Sidebar pathname={pathname} getNewUrl={getNewUrl} />
         </div>
 
         {/* Main Content Area as a Card */}
@@ -112,16 +92,7 @@ function HomeContent() {
         >
           <div className="flex-1 overflow-y-auto custom-scrollbar">
             <div className="p-4 md:p-8 max-w-6xl mx-auto w-full pb-24 md:pb-8">
-              {activeTab === "open" && (
-                <OpenView
-                  setActiveTab={(tab) => setActiveTab(tab as Tab)}
-                  onFileSelect={handleFileSelect}
-                  getNewUrl={getNewUrl}
-                />
-              )}
-              {activeTab === "template" && <TemplateView />}
-              {activeTab === "about" && <AboutView />}
-              {activeTab === "settings" && <SettingsView />}
+              {children}
             </div>
           </div>
         </main>
@@ -129,10 +100,7 @@ function HomeContent() {
       </div>
 
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-50">
-        <MobileNav
-          activeTab={activeTab}
-          setActiveTab={(tab: Tab) => setActiveTab(tab)}
-        />
+        <MobileNav pathname={pathname} />
       </div>
 
       {/* Global Drag and Drop Overlay */}
@@ -161,13 +129,5 @@ function HomeContent() {
         }
       `}</style>
     </div>
-  );
-}
-
-export default function Home() {
-  return (
-    <Suspense>
-      <HomeContent />
-    </Suspense>
   );
 }

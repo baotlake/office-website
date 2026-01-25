@@ -1,28 +1,32 @@
 "use client";
 
+import Link from "next/link";
 import { useExtracted } from "next-intl";
 import { FolderOpen, Layout, Settings, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type Tab = "open" | "template" | "about" | "settings";
-
 interface MobileNavProps {
-  activeTab: Tab;
-  setActiveTab: (tab: Tab) => void;
+  pathname: string;
   className?: string;
 }
 
-export function MobileNav({
-  activeTab,
-  setActiveTab,
-  className,
-}: MobileNavProps) {
+export function MobileNav({ pathname, className }: MobileNavProps) {
   const t = useExtracted();
 
   const navItems = [
-    { id: "open", label: t("Open"), icon: FolderOpen },
-    { id: "template", label: t("Template"), icon: Layout },
-    { id: "settings", label: t("Settings"), icon: Settings },
+    { id: "open", label: t("Open"), icon: FolderOpen, href: "/" },
+    {
+      id: "template",
+      label: t("Template"),
+      icon: Layout,
+      href: "/template",
+    },
+    {
+      id: "settings",
+      label: t("Settings"),
+      icon: Settings,
+      href: "/settings",
+    },
   ];
 
   return (
@@ -32,34 +36,37 @@ export function MobileNav({
         className,
       )}
     >
-      {navItems.map((item) => (
-        <button
-          key={item.id}
-          onClick={() => setActiveTab(item.id as Tab)}
-          className={cn(
-            "flex flex-col items-center justify-center gap-1.5 px-4 py-2 rounded-lg transition-colors min-w-[64px]",
-            activeTab === item.id
-              ? "text-primary bg-primary/10"
-              : "text-text-secondary hover:text-foreground active:bg-muted",
-          )}
-        >
-          <item.icon
+      {navItems.map((item) => {
+        const isActive = pathname === item.href;
+        return (
+          <Link
+            key={item.id}
+            href={item.href}
             className={cn(
-              "w-6 h-6",
-              activeTab === item.id ? "text-primary" : "text-text-secondary",
+              "flex flex-col items-center justify-center gap-1.5 px-4 py-2 rounded-lg transition-colors min-w-[64px]",
+              isActive
+                ? "text-primary bg-primary/10"
+                : "text-text-secondary hover:text-foreground active:bg-muted",
             )}
-            strokeWidth={2}
-          />
-          <span className="text-[10px] font-medium leading-none">
-            {item.label}
-          </span>
-        </button>
-      ))}
-      <button
-        onClick={() => setActiveTab("about")}
+          >
+            <item.icon
+              className={cn(
+                "w-6 h-6",
+                isActive ? "text-primary" : "text-text-secondary",
+              )}
+              strokeWidth={2}
+            />
+            <span className="text-[10px] font-medium leading-none">
+              {item.label}
+            </span>
+          </Link>
+        );
+      })}
+      <Link
+        href="/about"
         className={cn(
           "flex flex-col items-center justify-center gap-1.5 px-4 py-2 rounded-lg transition-colors min-w-[64px]",
-          activeTab === "about"
+          pathname === "/about"
             ? "text-primary bg-primary/10"
             : "text-text-secondary hover:text-foreground active:bg-muted",
         )}
@@ -67,14 +74,14 @@ export function MobileNav({
         <Info
           className={cn(
             "w-6 h-6",
-            activeTab === "about" ? "text-primary" : "text-text-secondary",
+            pathname === "/about" ? "text-primary" : "text-text-secondary",
           )}
           strokeWidth={2}
         />
         <span className="text-[10px] font-medium leading-none">
           {t("About")}
         </span>
-      </button>
+      </Link>
     </div>
   );
 }
