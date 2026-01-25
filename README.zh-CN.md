@@ -2,10 +2,14 @@
   <img src="./public/logo.svg" width="120" height="120" alt="Office App Logo">
 </p>
 
-<h1 align="center">Office App</h1>
+<h1 align="center">Office by ZIZIYI</h1>
 
 <p align="center">
   <strong>一款现代化、本地优先的 Office 文档预览与编辑解决方案。</strong>
+</p>
+
+<p align="center">
+  <a href="https://www.producthunt.com/products/serverless-web-office-by-ziziyi?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-serverless-web-office-by-ziziyi" target="_blank" rel="noopener noreferrer"><img alt="Serverless Web Office by ZIZIYI - Serverless Web Office: Private, In-Browser editing via WASM. | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1067951&theme=light&t=1769359248898"></a>
 </p>
 
 <p align="center">
@@ -32,7 +36,7 @@
 
 ## 🚀 概览
 
-**Office App** 是一款强大的 Web 应用程序，旨在为您提供在浏览器中直接查看和编辑 Office 文档（Word、Excel、PowerPoint）的无缝体验。它基于“本地优先”的设计理念，在提供桌面级编辑体验的同时，确保您的文档隐私和安全。
+**office.ziziyi.com** 是一款强大的 Web 应用程序，旨在为您提供在浏览器中直接查看和编辑 Office 文档（Word、Excel、PowerPoint）的无缝体验。它基于“本地优先”的设计理念，在提供桌面级编辑体验的同时，确保您的文档隐私和安全。
 
 ## ✨ 核心特性
 
